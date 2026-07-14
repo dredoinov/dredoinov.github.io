@@ -116,6 +116,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
             margin-bottom: 6px;
+            flex-shrink: 0;
         }
         .volume-btn img {
             width: 22px;
@@ -138,6 +139,8 @@
             opacity: 0;
             box-shadow: inset 0 0 20px rgba(155, 77, 255, 0.1);
             backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            position: relative;
         }
         .volume-wrap:hover .volume-slider,
         .volume-slider:hover {
@@ -156,21 +159,44 @@
             margin: 0;
             padding: 0;
             display: block;
+            position: relative;
+            z-index: 2;
         }
         .volume-slider input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
             border: 2px solid rgba(255,255,255,0.3);
             box-shadow: 0 0 40px rgba(155, 77, 255, 0.5), 0 0 80px rgba(155, 77, 255, 0.2);
             cursor: pointer;
             transition: 0.3s;
+            position: relative;
+            z-index: 3;
+            margin: 0;
         }
         .volume-slider input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.12);
+        }
+        .volume-slider input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(155, 77, 255, 0.5);
+            cursor: pointer;
+        }
+        .volume-slider input[type="range"]::-ms-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(155, 77, 255, 0.5);
+            cursor: pointer;
         }
         .boss-bar {
             background: rgba(255, 255, 255, 0.03);
@@ -544,6 +570,10 @@
             .social-btn img { width: 22px; height: 22px; }
             .footer-copyright { font-size: 0.5rem; bottom: 12px; right: 14px; padding: 4px 12px; }
             .music-overlay .play-btn { font-size: 1.4rem; padding: 18px 36px; }
+            .volume-slider input[type="range"]::-webkit-slider-thumb {
+                width: 18px;
+                height: 18px;
+            }
         }
         @media (max-width: 480px) {
             .glass-container { padding: 16px 12px 24px; border-radius: 30px; }
@@ -556,6 +586,10 @@
             .banner-container { border-radius: 20px 20px 0 0; }
             .music-overlay .play-btn { font-size: 1.2rem; padding: 14px 28px; }
             .music-overlay .play-btn small { font-size: 0.6rem; }
+            .volume-slider input[type="range"]::-webkit-slider-thumb {
+                width: 16px;
+                height: 16px;
+            }
         }
     </style>
 </head>
@@ -584,7 +618,7 @@
                 <div class="volume-btn" id="volumeBtn">
                     <img src="icons/sound.png" alt="sound" id="soundIcon">
                 </div>
-                <div class="volume-slider">
+                <div class="volume-slider" id="volumeSliderTrack">
                     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
                 </div>
             </div>
@@ -650,51 +684,39 @@
             var musicStarted = false;
             var isMuted = false;
             var playAttempts = 0;
+            var isDragging = false;
             
             console.log('Начальная громкость:', volumeSlider.value);
             audio.volume = parseFloat(volumeSlider.value);
             
             function updateIcon(vol) {
-                console.log('updateIcon вызван, vol:', vol, 'isMuted:', isMuted);
                 if (isMuted || vol === 0 || vol === '0') {
                     soundIcon.src = 'icons/mute.png';
-                    console.log('🔇 Иконка: mute');
                 } else {
                     soundIcon.src = 'icons/sound.png';
-                    console.log('🔊 Иконка: sound');
                 }
             }
             
             function startMusic() {
-                console.log('▶️ startMusic вызван, musicStarted:', musicStarted);
-                if (musicStarted) {
-                    console.log('Музыка уже запущена, пропускаем');
-                    return;
-                }
+                if (musicStarted) return;
                 
                 var vol = parseFloat(volumeSlider.value);
-                console.log('Попытка запуска с громкостью:', vol);
                 audio.volume = vol;
                 
-                var promise = audio.play();
-                console.log('audio.play() вызван, promise:', promise);
-                
-                if (promise !== undefined) {
-                    promise.then(function() {
+                audio.play()
+                    .then(function() {
                         musicStarted = true;
                         overlay.classList.add('hidden');
                         updateIcon(vol);
                         console.log('✅ МУЗЫКА ЗАПУЩЕНА УСПЕШНО!');
-                    }).catch(function(err) {
+                    })
+                    .catch(function(err) {
                         playAttempts++;
                         console.error('❌ Ошибка запуска (попытка ' + playAttempts + '):', err);
-                        console.log('Тип ошибки:', err.name, 'Сообщение:', err.message);
                         
                         if (playAttempts < 5) {
                             var delay = playAttempts * 100;
-                            console.log('Повторная попытка через ' + delay + 'мс');
                             setTimeout(function() {
-                                console.log('🔄 Повторная попытка #' + playAttempts);
                                 audio.play().then(function() {
                                     musicStarted = true;
                                     overlay.classList.add('hidden');
@@ -704,44 +726,30 @@
                                     console.error('❌ Ошибка на попытке ' + playAttempts + ':', e2);
                                 });
                             }, delay);
-                        } else {
-                            console.error('❌ НЕ УДАЛОСЬ ЗАПУСТИТЬ МУЗЫКУ ПОСЛЕ 5 ПОПЫТОК');
                         }
                     });
-                } else {
-                    console.error('❌ audio.play() не вернул Promise (старый браузер?)');
-                }
             }
             
-            console.log('Навешиваем обработчики на overlay и playBtn');
-            overlay.addEventListener('click', function(e) {
-                console.log('🖱️ Клик по overlay');
-                startMusic();
-            });
-            
+            overlay.addEventListener('click', startMusic);
             playBtn.addEventListener('click', function(e) {
-                console.log('🖱️ Клик по playBtn');
                 e.stopPropagation();
                 startMusic();
             });
             
             volumeBtn.addEventListener('click', function(e) {
-                console.log('🖱️ Клик по volumeBtn, musicStarted:', musicStarted);
                 e.stopPropagation();
                 
                 if (!musicStarted) {
-                    console.log('Музыка не запущена, запускаем через startMusic()');
                     startMusic();
                     return;
                 }
                 
                 isMuted = !isMuted;
-                console.log('isMuted переключен на:', isMuted);
                 
                 if (isMuted) {
                     audio.volume = 0;
                     soundIcon.src = 'icons/mute.png';
-                    console.log('🔇 Звук выключен (volume=0)');
+                    console.log('🔇 Звук выключен');
                 } else {
                     var vol = parseFloat(volumeSlider.value);
                     audio.volume = vol;
@@ -752,13 +760,9 @@
             
             volumeSlider.addEventListener('input', function() {
                 var vol = parseFloat(this.value);
-                console.log('🎚️ Ползунок изменён на:', vol, 'isMuted:', isMuted);
                 
                 if (!isMuted) {
                     audio.volume = vol;
-                    console.log('Громкость audio установлена на:', vol);
-                } else {
-                    console.log('Звук в режиме mute, громкость не меняется');
                 }
                 
                 updateIcon(vol);
@@ -767,19 +771,16 @@
                     isMuted = true;
                     audio.volume = 0;
                     soundIcon.src = 'icons/mute.png';
-                    console.log('🔇 Автоматический mute (громкость 0)');
                 }
                 
                 if (vol > 0 && isMuted) {
                     isMuted = false;
                     audio.volume = vol;
                     soundIcon.src = 'icons/sound.png';
-                    console.log('🔊 Автоматический unmute (громкость > 0)');
                 }
             });
             
             audio.addEventListener('ended', function() {
-                console.log('⏹️ Аудио закончилось, перезапускаем');
                 this.currentTime = 0;
                 if (!isMuted) {
                     this.volume = parseFloat(volumeSlider.value);
@@ -837,9 +838,7 @@
             
             discordBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('🖱️ Клик по Discord');
                 if (!musicStarted) {
-                    console.log('Музыка не запущена, запускаем');
                     startMusic();
                 }
                 navigator.clipboard.writeText('fuckuourself').then(function() {
@@ -848,7 +847,6 @@
                     toastTimeout = setTimeout(function() {
                         toast.classList.remove('show');
                     }, 2500);
-                    console.log('✅ Discord скопирован');
                 }).catch(function() {
                     alert('Не удалось скопировать');
                 });
@@ -861,7 +859,6 @@
             function resize() {
                 w = canvas.width = window.innerWidth;
                 h = canvas.height = window.innerHeight;
-                console.log('Canvas resized:', w, 'x', h);
             }
             
             window.addEventListener('resize', resize);
@@ -906,7 +903,6 @@
             drawSnow();
             
             document.getElementById('avatarImg').onerror = function() {
-                console.warn('⚠️ avatar.png не загружен, установлена заглушка');
                 this.alt = 'AVATAR';
                 this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
                 this.style.display = 'flex';
@@ -919,7 +915,6 @@
             };
             
             document.getElementById('bannerImg').onerror = function() {
-                console.warn('⚠️ banner.png не загружен, установлена заглушка');
                 this.alt = 'BANNER';
                 this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
                 this.style.display = 'flex';
@@ -931,15 +926,7 @@
                 this.src = '';
             };
             
-            console.log('✅ Все обработчики установлены! Жду клика на overlay.');
-            console.log('📌 Чтобы увидеть отладку — открой консоль (F12)');
-            
-            setTimeout(function() {
-                console.log('⏰ Прошло 5 секунд, статус musicStarted:', musicStarted);
-                console.log('Состояние overlay:', overlay.classList.contains('hidden') ? 'скрыт' : 'виден');
-                console.log('Громкость audio:', audio.volume);
-                console.log('Значение ползунка:', volumeSlider.value);
-            }, 5000);
+            console.log('✅ Все обработчики установлены! Жду клика.');
             
         })();
     </script>
