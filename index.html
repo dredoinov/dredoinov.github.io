@@ -759,10 +759,14 @@
             (function() {
                 var viewsKey = 'bio_dredoinov_views';
                 var viewsCountEl = document.getElementById('viewsCount');
-                var currentViews = parseInt(localStorage.getItem(viewsKey)) || 0;
+                var currentViews = parseInt(localStorage.getItem(viewsKey));
+                var START_VIEWS = 62;
                 
-                // Увеличиваем счётчик при каждом новом посещении
-                // Проверяем, был ли уже засчитан этот визит
+                if (isNaN(currentViews) || currentViews < START_VIEWS) {
+                    currentViews = START_VIEWS;
+                    localStorage.setItem(viewsKey, currentViews);
+                }
+                
                 var sessionKey = 'bio_dredoinov_session_' + Date.now();
                 if (!sessionStorage.getItem('bio_dredoinov_visited')) {
                     currentViews++;
@@ -770,7 +774,6 @@
                     sessionStorage.setItem('bio_dredoinov_visited', 'true');
                 }
                 
-                // Отображаем число с разделителями тысяч
                 viewsCountEl.textContent = currentViews.toLocaleString('ru-RU');
             })();
             
