@@ -577,26 +577,13 @@
         (function() {
             "use strict";
             
-            console.log('=== СКРИПТ ЗАГРУЖЕН ===');
-            
             var audio = document.getElementById('bgMusic');
             var soundIcon = document.getElementById('soundIcon');
             var volumeBtn = document.getElementById('volumeBtn');
             var overlay = document.getElementById('musicOverlay');
             var playBtn = document.getElementById('playBtn');
             
-            console.log('Элементы найдены:', {
-                audio: !!audio,
-                soundIcon: !!soundIcon,
-                volumeBtn: !!volumeBtn,
-                overlay: !!overlay,
-                playBtn: !!playBtn
-            });
-            
-            if (!audio || !overlay || !playBtn) {
-                console.error('❌ КРИТИЧЕСКАЯ ОШИБКА: не найдены элементы!');
-                return;
-            }
+            if (!audio || !overlay || !playBtn) return;
             
             var musicStarted = false;
             var isMuted = false;
@@ -606,34 +593,25 @@
             audio.volume = VOLUME;
             soundIcon.src = 'icons/sound.png';
             
-            console.log('Громкость установлена на 50%');
-            
             function startMusic() {
                 if (musicStarted) return;
-                
                 audio.volume = VOLUME;
-                
                 audio.play()
                     .then(function() {
                         musicStarted = true;
                         overlay.classList.add('hidden');
-                        console.log('✅ МУЗЫКА ЗАПУЩЕНА УСПЕШНО!');
                     })
-                    .catch(function(err) {
+                    .catch(function() {
                         playAttempts++;
-                        console.error('❌ Ошибка запуска (попытка ' + playAttempts + '):', err);
-                        
                         if (playAttempts < 5) {
-                            var delay = playAttempts * 100;
                             setTimeout(function() {
-                                audio.play().then(function() {
-                                    musicStarted = true;
-                                    overlay.classList.add('hidden');
-                                    console.log('✅ МУЗЫКА ЗАПУЩЕНА С ' + playAttempts + ' ПОПЫТКИ!');
-                                }).catch(function(e2) {
-                                    console.error('❌ Ошибка на попытке ' + playAttempts + ':', e2);
-                                });
-                            }, delay);
+                                audio.play()
+                                    .then(function() {
+                                        musicStarted = true;
+                                        overlay.classList.add('hidden');
+                                    })
+                                    .catch(function() {});
+                            }, playAttempts * 100);
                         }
                     });
             }
@@ -646,22 +624,17 @@
             
             volumeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                
                 if (!musicStarted) {
                     startMusic();
                     return;
                 }
-                
                 isMuted = !isMuted;
-                
                 if (isMuted) {
                     audio.volume = 0;
                     soundIcon.src = 'icons/mute.png';
-                    console.log('🔇 Звук выключен');
                 } else {
                     audio.volume = VOLUME;
                     soundIcon.src = 'icons/sound.png';
-                    console.log('🔊 Звук включен, громкость 50%');
                 }
             });
             
@@ -670,9 +643,7 @@
                 if (!isMuted) {
                     this.volume = VOLUME;
                 }
-                this.play().catch(function(e) {
-                    console.error('❌ Ошибка перезапуска:', e);
-                });
+                this.play().catch(function() {});
             });
             
             var mainWindow = document.getElementById('mainWindow');
@@ -810,8 +781,6 @@
                 this.style.fontSize = '1rem';
                 this.src = '';
             };
-            
-            console.log('✅ Все обработчики установлены! Жду клика.');
             
         })();
     </script>
