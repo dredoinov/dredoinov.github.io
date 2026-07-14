@@ -367,6 +367,46 @@
         .social-btn:hover .discord-hover {
             display: inline;
         }
+        .views-counter {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 60px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        .views-counter:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(155, 77, 255, 0.15);
+            transform: scale(1.02);
+        }
+        .views-counter img {
+            width: 20px;
+            height: 20px;
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            opacity: 0.8;
+        }
+        .views-counter .count {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            min-width: 20px;
+            text-align: center;
+        }
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -510,6 +550,8 @@
             .social-btn img { width: 22px; height: 22px; }
             .footer-copyright { font-size: 0.5rem; bottom: 12px; right: 14px; padding: 4px 12px; }
             .music-overlay .play-btn { font-size: 1.4rem; padding: 18px 36px; }
+            .views-counter { font-size: 0.65rem; padding: 8px 14px; bottom: 18px; left: 18px; }
+            .views-counter img { width: 16px; height: 16px; }
         }
         @media (max-width: 480px) {
             .glass-container { padding: 16px 12px 24px; border-radius: 30px; }
@@ -522,6 +564,8 @@
             .banner-container { border-radius: 20px 20px 0 0; }
             .music-overlay .play-btn { font-size: 1.2rem; padding: 14px 28px; }
             .music-overlay .play-btn small { font-size: 0.6rem; }
+            .views-counter { font-size: 0.55rem; padding: 6px 12px; bottom: 14px; left: 14px; gap: 6px; }
+            .views-counter img { width: 14px; height: 14px; }
         }
     </style>
 </head>
@@ -544,6 +588,13 @@
         © 2026 bio dredoinov<br>
         <span>Никакие права не защищены!</span>
     </div>
+
+    <!-- СЧЁТЧИК ПРОСМОТРОВ -->
+    <div class="views-counter" id="viewsCounter">
+        <img src="icons/eye.png" alt="views">
+        <span class="count" id="viewsCount">0</span>
+    </div>
+
     <div class="glass-container" id="container">
         <div class="top-bar">
             <div class="volume-wrap">
@@ -701,6 +752,27 @@
                 }
                 copyDiscord();
             });
+            
+            // ========================================
+            // СЧЁТЧИК ПРОСМОТРОВ (localStorage)
+            // ========================================
+            (function() {
+                var viewsKey = 'bio_dredoinov_views';
+                var viewsCountEl = document.getElementById('viewsCount');
+                var currentViews = parseInt(localStorage.getItem(viewsKey)) || 0;
+                
+                // Увеличиваем счётчик при каждом новом посещении
+                // Проверяем, был ли уже засчитан этот визит
+                var sessionKey = 'bio_dredoinov_session_' + Date.now();
+                if (!sessionStorage.getItem('bio_dredoinov_visited')) {
+                    currentViews++;
+                    localStorage.setItem(viewsKey, currentViews);
+                    sessionStorage.setItem('bio_dredoinov_visited', 'true');
+                }
+                
+                // Отображаем число с разделителями тысяч
+                viewsCountEl.textContent = currentViews.toLocaleString('ru-RU');
+            })();
             
             var mainWindow = document.getElementById('mainWindow');
             var isTouching = false;
