@@ -189,15 +189,6 @@
             box-shadow: 0 0 40px rgba(155, 77, 255, 0.5);
             cursor: pointer;
         }
-        .volume-slider input[type="range"]::-ms-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 0 40px rgba(155, 77, 255, 0.5);
-            cursor: pointer;
-        }
         .boss-bar {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -570,10 +561,6 @@
             .social-btn img { width: 22px; height: 22px; }
             .footer-copyright { font-size: 0.5rem; bottom: 12px; right: 14px; padding: 4px 12px; }
             .music-overlay .play-btn { font-size: 1.4rem; padding: 18px 36px; }
-            .volume-slider input[type="range"]::-webkit-slider-thumb {
-                width: 18px;
-                height: 18px;
-            }
         }
         @media (max-width: 480px) {
             .glass-container { padding: 16px 12px 24px; border-radius: 30px; }
@@ -586,10 +573,6 @@
             .banner-container { border-radius: 20px 20px 0 0; }
             .music-overlay .play-btn { font-size: 1.2rem; padding: 14px 28px; }
             .music-overlay .play-btn small { font-size: 0.6rem; }
-            .volume-slider input[type="range"]::-webkit-slider-thumb {
-                width: 16px;
-                height: 16px;
-            }
         }
     </style>
 </head>
@@ -684,10 +667,12 @@
             var musicStarted = false;
             var isMuted = false;
             var playAttempts = 0;
-            var isDragging = false;
+            
+            var initialVolume = 0.5;
+            volumeSlider.value = initialVolume;
+            audio.volume = initialVolume;
             
             console.log('Начальная громкость:', volumeSlider.value);
-            audio.volume = parseFloat(volumeSlider.value);
             
             function updateIcon(vol) {
                 if (isMuted || vol === 0 || vol === '0') {
@@ -696,6 +681,8 @@
                     soundIcon.src = 'icons/sound.png';
                 }
             }
+            
+            updateIcon(initialVolume);
             
             function startMusic() {
                 if (musicStarted) return;
@@ -765,19 +752,18 @@
                     audio.volume = vol;
                 }
                 
-                updateIcon(vol);
-                
-                if (vol === 0 && !isMuted) {
+                if (vol === 0) {
                     isMuted = true;
                     audio.volume = 0;
                     soundIcon.src = 'icons/mute.png';
-                }
-                
-                if (vol > 0 && isMuted) {
+                } else {
                     isMuted = false;
                     audio.volume = vol;
                     soundIcon.src = 'icons/sound.png';
                 }
+                
+                updateIcon(vol);
+                console.log('🎚️ Ползунок:', vol, 'isMuted:', isMuted);
             });
             
             audio.addEventListener('ended', function() {
