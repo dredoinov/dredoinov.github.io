@@ -318,6 +318,7 @@
             text-align: center;
             font-weight: 500;
             letter-spacing: 0.3px;
+            transition: 0.3s;
         }
         .social-btn::before {
             content: '';
@@ -356,6 +357,15 @@
         .social-btn:hover img {
             filter: grayscale(100%) contrast(1.2) brightness(1.1);
             transform: scale(1.04);
+        }
+        .social-btn .discord-hover {
+            display: none;
+        }
+        .social-btn:hover .discord-normal {
+            display: none;
+        }
+        .social-btn:hover .discord-hover {
+            display: inline;
         }
         #snowCanvas {
             position: fixed;
@@ -561,7 +571,8 @@
                 </a>
                 <button class="social-btn" id="discordBtn">
                     <img src="icons/discord.png" alt="Discord">
-                    <span>Discord</span>
+                    <span class="discord-normal">Discord</span>
+                    <span class="discord-hover">Нажмите чтобы скопировать</span>
                 </button>
                 <a href="https://funpay.com/users/6491336/" target="_blank" class="social-btn">
                     <img src="icons/funpay.png" alt="FunPay">
@@ -574,8 +585,239 @@
         <source src="audio/Face_feat._xxxtentacion_-_Forever_Young_(SkySound.cc).mp3" type="audio/mpeg">
     </audio>
     <script>
-        // ПОЛНОСТЬЮ ОБФУСЦИРОВАННЫЙ КОД С ИСПРАВЛЕННЫМ КОПИРОВАНИЕМ
-        (function(){var _0x3f7a=['createElement','textarea','body','appendChild','value','select','execCommand','copy','fuckuourself','removeChild','click','addEventListener','getElementById','classList','add','hidden','sound.png','icons/sound.png','mute.png','src','0.5','volume','play','then','catch','ended','currentTime','mousemove','getBoundingClientRect','clientX','clientWidth','clientY','clientHeight','perspective(900px) rotateX(','deg) rotateY(','deg) scale(1.01)','mouseleave','touchstart','touchend','customCursor','active','style','left','px','top','getContext','2d','width','height','innerWidth','innerHeight','resize','random','PI','sin','beginPath','arc','createRadialGradient','addColorStop','fillStyle','shadowColor','rgba(155, 77, 255, 0.15)','shadowBlur','fill','requestAnimationFrame','onerror','alt','background','display','flex','alignItems','center','justifyContent','color','fontFamily','fontSize','0.8rem','1rem','show','remove'];!function(_0x4b2a,_0x3f7a){var _0x5e3d=function(_0x48b8){while(--_0x48b8){_0x4b2a['push'](_0x4b2a['shift']());}};_0x5e3d(++_0x3f7a);}(_0x3f7a,0x1b4);var _0x5e3d=function(_0x4b2a,_0x3f7a){_0x4b2a=_0x4b2a-0x0;var _0x5e3d=_0x3f7a[_0x4b2a];return _0x5e3d;};var _0x6b2a=function(){var _0x4b2a=document[_0x5e3d('0x0')](_0x5e3d('0x1'));_0x4b2a[_0x5e3d('0x2')]=_0x5e3d('0x3');document[_0x5e3d('0x4')][_0x5e3d('0x5')](_0x4b2a);_0x4b2a[_0x5e3d('0x6')][_0x5e3d('0x7')]();_0x4b2a[_0x5e3d('0x6')][_0x5e3d('0x7')]();_0x4b2a[_0x5e3d('0x6')][_0x5e3d('0x7')]();_0x4b2a[_0x5e3d('0x6')][_0x5e3d('0x7')]();_0x4b2a[_0x5e3d('0x6')][_0x5e3d('0x7')]();_0x4b2a[_0x5e3d('0x8')]();document[_0x5e3d('0x4')][_0x5e3d('0x9')](_0x4b2a);};var _0x6c2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('soundIcon');if(_0x4b2a){_0x4b2a[_0x5e3d('0x11')]=_0x5e3d('0x12');}};var _0x6d2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('soundIcon');if(_0x4b2a){_0x4b2a[_0x5e3d('0x11')]=_0x5e3d('0x13');}};var _0x6e2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('bgMusic');if(_0x4b2a){_0x4b2a[_0x5e3d('0x14')]=0.5;}};_0x6e2a();_0x6c2a();var _0x6f2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('bgMusic');var _0x6b2a=document[_0x5e3d('0xe')]('musicOverlay');if(!_0x4b2a||!_0x6b2a)return;var _0x6c2a=false;var _0x6d2a=false;var _0x6e2a=0;var _0x6f2a=0.5;var _0x6a2a=function(){if(_0x6c2a)return;_0x4b2a[_0x5e3d('0x14')]=_0x6f2a;_0x4b2a[_0x5e3d('0x15')]()[_0x5e3d('0x16')](function(){_0x6c2a=true;_0x6b2a[_0x5e3d('0xf')][_0x5e3d('0x10')](_0x5e3d('0xa'));})[_0x5e3d('0x17')](function(){_0x6e2a++;if(_0x6e2a<0x5){setTimeout(function(){_0x4b2a[_0x5e3d('0x15')]()[_0x5e3d('0x16')](function(){_0x6c2a=true;_0x6b2a[_0x5e3d('0xf')][_0x5e3d('0x10')](_0x5e3d('0xa'));})[_0x5e3d('0x17')](function(){});},_0x6e2a*0x64);}});};var _0x6b2a=document[_0x5e3d('0xe')]('volumeBtn');var _0x6c2a=document[_0x5e3d('0xe')]('playBtn');_0x6b2a[_0x5e3d('0xb')](_0x5e3d('0xc'),_0x6a2a);_0x6c2a[_0x5e3d('0xb')](_0x5e3d('0xc'),function(_0x6d2a){_0x6d2a[_0x5e3d('0xd')]();_0x6a2a();});_0x6b2a[_0x5e3d('0xb')](_0x5e3d('0xc'),function(_0x6d2a){_0x6d2a[_0x5e3d('0xd')]();if(!_0x6c2a){_0x6a2a();return;}_0x6d2a=!_0x6d2a;if(_0x6d2a){_0x4b2a[_0x5e3d('0x14')]=0;_0x6d2a();}else{_0x4b2a[_0x5e3d('0x14')]=_0x6f2a;_0x6c2a();}});_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0x18'),function(){this[_0x5e3d('0x19')]=0;if(!_0x6d2a){this[_0x5e3d('0x14')]=_0x6f2a;}this[_0x5e3d('0x15')]()[_0x5e3d('0x17')](function(){});});};_0x6f2a();var _0x6a2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('mainWindow');if(!_0x4b2a)return;var _0x6a2a=false;_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0x1a'),function(_0x6b2a){if(_0x6a2a)return;var _0x6c2a=_0x6b2a[_0x5e3d('0x1b')]();var _0x6d2a=(_0x6b2a[_0x5e3d('0x1c')]-_0x6c2a[_0x5e3d('0x1c')])/_0x6c2a[_0x5e3d('0x1d')]-0.5;var _0x6e2a=(_0x6b2a[_0x5e3d('0x1e')]-_0x6c2a[_0x5e3d('0x1e')])/_0x6c2a[_0x5e3d('0x1f')]-0.5;this[_0x5e3d('0x28')]['transform']=_0x5e3d('0x20')+(-_0x6e2a*0xe)+_0x5e3d('0x21')+(_0x6d2a*0xe)+_0x5e3d('0x22');});_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0x23'),function(){if(_0x6a2a)return;this[_0x5e3d('0x28')]['transform']='perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';});_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0x24'),function(){_0x6a2a=true;});_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0x25'),function(){_0x6a2a=false;this[_0x5e3d('0x28')]['transform']='perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';});};_0x6a2a();var _0x6b2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('customCursor');var _0x6b2a=document[_0x5e3d('0xe')]('mainWindow');if(!_0x4b2a||!_0x6b2a)return;var _0x6c2a=false;_0x6b2a[_0x5e3d('0xb')]('mouseenter',function(){_0x4b2a[_0x5e3d('0xf')][_0x5e3d('0x10')](_0x5e3d('0x26'));_0x6c2a=true;});_0x6b2a[_0x5e3d('0xb')]('mouseleave',function(){_0x4b2a[_0x5e3d('0xf')][_0x5e3d('0x3e')](_0x5e3d('0x26'));_0x6c2a=false;});document[_0x5e3d('0xb')]('mousemove',function(_0x6d2a){if(_0x6c2a){_0x4b2a[_0x5e3d('0x28')][_0x5e3d('0x29')]=_0x6d2a['clientX']+_0x5e3d('0x2a');_0x4b2a[_0x5e3d('0x28')][_0x5e3d('0x2b')]=_0x6d2a['clientY']+_0x5e3d('0x2a');}});};_0x6b2a();var _0x6c2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('discordBtn');var _0x6c2a=document[_0x5e3d('0xe')]('toast');if(!_0x4b2a||!_0x6c2a)return;var _0x6d2a=null;_0x4b2a[_0x5e3d('0xb')](_0x5e3d('0xc'),function(_0x6e2a){_0x6e2a[_0x5e3d('0xd')]();var _0x6f2a=_0x5e3d('0x3');if(typeof navigator!=='undefined'&&navigator['clipboard']&&typeof navigator['clipboard']['writeText']==='function'){navigator['clipboard']['writeText'](_0x6f2a)[_0x5e3d('0x16')](function(){_0x6c2a[_0x5e3d('0xf')][_0x5e3d('0x10')](_0x5e3d('0x3d'));clearTimeout(_0x6d2a);_0x6d2a=setTimeout(function(){_0x6c2a[_0x5e3d('0xf')][_0x5e3d('0x3e')](_0x5e3d('0x3d'));},0x9c4);})[_0x5e3d('0x17')](function(){_0x6b2a();});}else{_0x6b2a();}});};_0x6c2a();var _0x6d2a=function(){var _0x4b2a=document[_0x5e3d('0xe')]('snowCanvas');var _0x6d2a=_0x4b2a[_0x5e3d('0x2c')](_0x5e3d('0x2d'));var _0x6e2a,_0x6f2a;function _0x6a2a(){_0x6e2a=_0x4b2a[_0x5e3d('0x2e')]=window[_0x5e3d('0x30')];_0x6f2a=_0x4b2a[_0x5e3d('0x2f')]=window[_0x5e3d('0x31')];}window[_0x5e3d('0xb')](_0x5e3d('0x32'),_0x6a2a);_0x6a2a();var _0x6b2a=[];for(var _0x6c2a=0;_0x6c2a<0xb4;_0x6c2a++){_0x6b2a['push']({x:Math[_0x5e3d('0x33')]()*_0x6e2a,y:Math[_0x5e3d('0x33')]()*_0x6f2a,r:Math[_0x5e3d('0x33')]()*0x2.5+0x1.2,speed:Math[_0x5e3d('0x33')]()*0.6+0.2,opacity:Math[_0x5e3d('0x33')]()*0.5+0.15,drift:(Math[_0x5e3d('0x33')]()-0.5)*0.3});}function _0x6d2a(){_0x6d2a[_0x5e3d('0x34')](0,0,_0x6e2a,_0x6f2a);for(var _0x6e2a=0;_0x6e2a<_0x6b2a['length'];_0x6e2a++){var _0x6f2a=_0x6b2a[_0x6e2a];_0x6f2a['y']+=_0x6f2a['speed'];_0x6f2a['x']+=_0x6f2a['drift']+Math[_0x5e3d('0x35')](_0x6f2a['y']*0.003)*0.2;if(_0x6f2a['y']>_0x6f2a){_0x6f2a['y']=-0x5;_0x6f2a['x']=Math[_0x5e3d('0x33')]()*_0x6e2a;}if(_0x6f2a['x']>_0x6e2a){_0x6f2a['x']=0;}if(_0x6f2a['x']<0){_0x6f2a['x']=_0x6e2a;}_0x6d2a[_0x5e3d('0x36')]();_0x6d2a[_0x5e3d('0x37')](_0x6f2a['x'],_0x6f2a['y'],_0x6f2a['r'],0,Math[_0x5e3d('0x38')]*0x2);var _0x6a2a=_0x6d2a[_0x5e3d('0x39')](_0x6f2a['x'],_0x6f2a['y'],0,_0x6f2a['x'],_0x6f2a['y'],_0x6f2a['r']);_0x6a2a[_0x5e3d('0x3a')](0,'rgba(200, 160, 255, '+(_0x6f2a['opacity']*0.8)+')');_0x6a2a[_0x5e3d('0x3a')](0.6,'rgba(150, 100, 220, '+(_0x6f2a['opacity']*0.5)+')');_0x6a2a[_0x5e3d('0x3a')](1,'rgba(100, 50, 180, 0)');_0x6d2a[_0x5e3d('0x3b')]=_0x6a2a;_0x6d2a[_0x5e3d('0x3c')]=_0x5e3d('0x3d');_0x6d2a[_0x5e3d('0x3e')]=0xa;_0x6d2a[_0x5e3d('0x3f')]();}_0x6d2a[_0x5e3d('0x40')](_0x6d2a);}_0x6d2a();};_0x6d2a();document[_0x5e3d('0xe')]('avatarImg')[_0x5e3d('0x41')]=function(){this[_0x5e3d('0x42')]='AVATAR';this[_0x5e3d('0x43')]='linear-gradient(135deg, #2a0a4a, #1a0b2e)';this[_0x5e3d('0x44')]=_0x5e3d('0x45');this[_0x5e3d('0x46')]=_0x5e3d('0x47');this[_0x5e3d('0x48')]=_0x5e3d('0x47');this[_0x5e3d('0x49')]='rgba(255,255,255,0.3)';this[_0x5e3d('0x4a')]='Inter';this[_0x5e3d('0x4b')]=_0x5e3d('0x4c');this['src']='';};document[_0x5e3d('0xe')]('bannerImg')[_0x5e3d('0x41')]=function(){this[_0x5e3d('0x42')]='BANNER';this[_0x5e3d('0x43')]='linear-gradient(135deg, #2a0a4a, #1a0b2e)';this[_0x5e3d('0x44')]=_0x5e3d('0x45');this[_0x5e3d('0x46')]=_0x5e3d('0x47');this[_0x5e3d('0x48')]=_0x5e3d('0x47');this[_0x5e3d('0x49')]='rgba(255,255,255,0.15)';this[_0x5e3d('0x4a')]='Inter';this[_0x5e3d('0x4b')]=_0x5e3d('0x4d');this['src']='';};})();
+        (function(){
+            var audio = document.getElementById('bgMusic');
+            var soundIcon = document.getElementById('soundIcon');
+            var volumeBtn = document.getElementById('volumeBtn');
+            var overlay = document.getElementById('musicOverlay');
+            var playBtn = document.getElementById('playBtn');
+            var discordBtn = document.getElementById('discordBtn');
+            var toast = document.getElementById('toast');
+            var toastTimeout;
+            
+            if (!audio || !overlay || !playBtn) return;
+            
+            var musicStarted = false;
+            var isMuted = false;
+            var playAttempts = 0;
+            var VOLUME = 0.5;
+            
+            audio.volume = VOLUME;
+            soundIcon.src = 'icons/sound.png';
+            
+            function startMusic() {
+                if (musicStarted) return;
+                audio.volume = VOLUME;
+                audio.play()
+                    .then(function() {
+                        musicStarted = true;
+                        overlay.classList.add('hidden');
+                    })
+                    .catch(function() {
+                        playAttempts++;
+                        if (playAttempts < 5) {
+                            setTimeout(function() {
+                                audio.play()
+                                    .then(function() {
+                                        musicStarted = true;
+                                        overlay.classList.add('hidden');
+                                    })
+                                    .catch(function() {});
+                            }, playAttempts * 100);
+                        }
+                    });
+            }
+            
+            overlay.addEventListener('click', startMusic);
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                startMusic();
+            });
+            
+            volumeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!musicStarted) {
+                    startMusic();
+                    return;
+                }
+                isMuted = !isMuted;
+                if (isMuted) {
+                    audio.volume = 0;
+                    soundIcon.src = 'icons/mute.png';
+                } else {
+                    audio.volume = VOLUME;
+                    soundIcon.src = 'icons/sound.png';
+                }
+            });
+            
+            audio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                if (!isMuted) {
+                    this.volume = VOLUME;
+                }
+                this.play().catch(function() {});
+            });
+            
+            function copyDiscord() {
+                var text = 'fuckuourself';
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(function() {
+                        showToast();
+                    }).catch(function() {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            }
+            
+            function fallbackCopy(text) {
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.top = '-9999px';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast();
+                } catch(e) {}
+                document.body.removeChild(textarea);
+            }
+            
+            function showToast() {
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
+            
+            discordBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!musicStarted) {
+                    startMusic();
+                }
+                copyDiscord();
+            });
+            
+            var mainWindow = document.getElementById('mainWindow');
+            var isTouching = false;
+            
+            mainWindow.addEventListener('mousemove', function(e) {
+                if (isTouching) return;
+                var rect = this.getBoundingClientRect();
+                var x = (e.clientX - rect.left) / rect.width - 0.5;
+                var y = (e.clientY - rect.top) / rect.height - 0.5;
+                this.style.transform = 'perspective(900px) rotateX(' + (-y * 14) + 'deg) rotateY(' + (x * 14) + 'deg) scale(1.01)';
+            });
+            
+            mainWindow.addEventListener('mouseleave', function() {
+                if (isTouching) return;
+                this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+            
+            mainWindow.addEventListener('touchstart', function() { isTouching = true; });
+            mainWindow.addEventListener('touchend', function() {
+                isTouching = false;
+                this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+            
+            var cursor = document.getElementById('customCursor');
+            var cursorActive = false;
+            
+            mainWindow.addEventListener('mouseenter', function() {
+                cursor.classList.add('active');
+                cursorActive = true;
+            });
+            
+            mainWindow.addEventListener('mouseleave', function() {
+                cursor.classList.remove('active');
+                cursorActive = false;
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (cursorActive) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }
+            });
+            
+            var canvas = document.getElementById('snowCanvas');
+            var ctx = canvas.getContext('2d');
+            var w, h;
+            
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+            
+            var particles = [];
+            var COUNT = 180;
+            
+            for (var i = 0; i < COUNT; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 2.5 + 1.2,
+                    speed: Math.random() * 0.6 + 0.2,
+                    opacity: Math.random() * 0.5 + 0.15,
+                    drift: (Math.random() - 0.5) * 0.3
+                });
+            }
+            
+            function drawSnow() {
+                ctx.clearRect(0, 0, w, h);
+                for (var i = 0; i < particles.length; i++) {
+                    var p = particles[i];
+                    p.y += p.speed;
+                    p.x += p.drift + Math.sin(p.y * 0.003) * 0.2;
+                    if (p.y > h) { p.y = -5; p.x = Math.random() * w; }
+                    if (p.x > w) p.x = 0;
+                    if (p.x < 0) p.x = w;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+                    grad.addColorStop(0, 'rgba(200, 160, 255, ' + (p.opacity * 0.8) + ')');
+                    grad.addColorStop(0.6, 'rgba(150, 100, 220, ' + (p.opacity * 0.5) + ')');
+                    grad.addColorStop(1, 'rgba(100, 50, 180, 0)');
+                    ctx.fillStyle = grad;
+                    ctx.shadowColor = 'rgba(155, 77, 255, 0.15)';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                }
+                requestAnimationFrame(drawSnow);
+            }
+            drawSnow();
+            
+            document.getElementById('avatarImg').onerror = function() {
+                this.alt = 'AVATAR';
+                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.color = 'rgba(255,255,255,0.3)';
+                this.style.fontFamily = 'Inter';
+                this.style.fontSize = '0.8rem';
+                this.src = '';
+            };
+            
+            document.getElementById('bannerImg').onerror = function() {
+                this.alt = 'BANNER';
+                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.color = 'rgba(255,255,255,0.15)';
+                this.style.fontFamily = 'Inter';
+                this.style.fontSize = '1rem';
+                this.src = '';
+            };
+        })();
     </script>
 </body>
 </html>
