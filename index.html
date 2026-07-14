@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +19,7 @@
             position: relative;
         }
 
-        /* ---------- ЖИДКИЙ ФОН (Liquid Background) ---------- */
+        /* ---------- ЖИДКИЙ ФОН ---------- */
         .liquid-bg {
             position: fixed;
             top: 0;
@@ -68,7 +67,7 @@
             100% { transform: translate(80px, -40px) scale(1.05); }
         }
 
-        /* ---------- GLASS-ЭФФЕКТ (основной контейнер) ---------- */
+        /* ---------- GLASS-КОНТЕЙНЕР ---------- */
         .glass-container {
             position: relative;
             z-index: 2;
@@ -100,7 +99,6 @@
             pointer-events: none;
         }
 
-        /* ---------- TOP BAR ---------- */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -109,7 +107,7 @@
             padding: 0 4px;
         }
 
-        /* ---------- ГРОМКОСТЬ (Liquid Glass) ---------- */
+        /* ---------- ГРОМКОСТЬ ---------- */
         .volume-wrap {
             display: flex;
             flex-direction: column;
@@ -199,7 +197,7 @@
             cursor: pointer;
         }
 
-        /* ---------- БОССБАР (Liquid Glass) ---------- */
+        /* ---------- БОССБАР ---------- */
         .boss-bar {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -252,7 +250,7 @@
             50% { filter: drop-shadow(0 0 40px rgba(150, 80, 220, 0.25)) drop-shadow(0 0 80px rgba(100, 60, 180, 0.1)); }
         }
 
-        /* ---------- ГЛАВНОЕ ОКНО (Liquid Glass) ---------- */
+        /* ---------- ГЛАВНОЕ ОКНО ---------- */
         .main-window {
             position: relative;
             width: 100%;
@@ -290,7 +288,6 @@
             pointer-events: none;
         }
 
-        /* ---------- БАННЕР ---------- */
         .banner-container {
             position: absolute;
             top: 0;
@@ -313,7 +310,6 @@
             filter: brightness(0.8) saturate(1.1);
         }
 
-        /* ---------- АВАТАРКА (Glass) ---------- */
         .avatar-wrapper {
             position: relative;
             width: 140px;
@@ -361,7 +357,6 @@
             100% { opacity: 0.8; filter: blur(12px) brightness(1.6); }
         }
 
-        /* ---------- КНОПКИ (Glass) ---------- */
         .social-buttons {
             display: flex;
             flex-direction: column;
@@ -447,7 +442,6 @@
             transform: scale(1.04);
         }
 
-        /* ---------- СНЕЖИНКИ ---------- */
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -458,7 +452,6 @@
             z-index: 1;
         }
 
-        /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
             bottom: 40px;
@@ -486,7 +479,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ---------- КУРСОР (ореол) ---------- */
         .custom-cursor {
             position: fixed;
             width: 220px;
@@ -505,7 +497,6 @@
             opacity: 1;
         }
 
-        /* ---------- КОПИРАЙТ ---------- */
         .footer-copyright {
             position: fixed;
             bottom: 22px;
@@ -531,7 +522,65 @@
             opacity: 0.5;
         }
 
-        /* ---------- АДАПТИВ ---------- */
+        /* ============================================ */
+        /* 🌟 НОВАЯ КНОПКА ДЛЯ ЗАПУСКА МУЗЫКИ */
+        /* ============================================ */
+        .music-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(10, 3, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            cursor: pointer;
+        }
+        .music-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .music-overlay .play-btn {
+            font-family: 'Russo One', sans-serif;
+            font-size: 2rem;
+            color: #c084fc;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(155, 77, 255, 0.3);
+            border-radius: 80px;
+            padding: 24px 60px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 0 60px rgba(155, 77, 255, 0.1);
+            text-align: center;
+            user-select: none;
+            animation: pulseBtn 2s ease-in-out infinite;
+        }
+        .music-overlay .play-btn:hover {
+            background: rgba(155, 77, 255, 0.15);
+            border-color: #c084fc;
+            transform: scale(1.05);
+            box-shadow: 0 0 80px rgba(155, 77, 255, 0.2);
+        }
+        .music-overlay .play-btn small {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 0 40px rgba(155, 77, 255, 0.1); }
+            50% { box-shadow: 0 0 80px rgba(155, 77, 255, 0.25), 0 0 120px rgba(155, 77, 255, 0.1); }
+        }
+
         @media (max-width: 768px) {
             .glass-container { width: 94%; padding: 20px 18px 32px; border-radius: 40px; }
             .boss-bar h1 { font-size: 1.4rem; letter-spacing: 2px; }
@@ -549,6 +598,7 @@
             .liquid-bg .orb:nth-child(2) { width: 250px; height: 250px; }
             .liquid-bg .orb:nth-child(3) { width: 200px; height: 200px; }
             .glass-container::before { border-radius: 40px; }
+            .music-overlay .play-btn { font-size: 1.4rem; padding: 18px 36px; }
         }
         @media (max-width: 480px) {
             .glass-container { padding: 16px 12px 24px; border-radius: 30px; }
@@ -560,10 +610,22 @@
             .main-window { border-radius: 20px; }
             .main-window::before { border-radius: 20px; }
             .banner-container { border-radius: 20px 20px 0 0; }
+            .music-overlay .play-btn { font-size: 1.2rem; padding: 14px 28px; }
+            .music-overlay .play-btn small { font-size: 0.6rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================ -->
+    <!-- 🌟 ОВЕРЛЕЙ ДЛЯ ЗАПУСКА МУЗЫКИ -->
+    <!-- ============================================ -->
+    <div class="music-overlay" id="musicOverlay">
+        <div class="play-btn" id="playBtn">
+            🎵 Нажми для музыки
+            <small>click to start</small>
+        </div>
+    </div>
 
     <!-- ЖИДКИЙ ФОН -->
     <div class="liquid-bg">
@@ -581,7 +643,7 @@
         <span>Никакие права не защищены!</span>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕЙНЕР GLASS -->
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
     <div class="glass-container" id="container">
 
         <div class="top-bar">
@@ -634,47 +696,46 @@
         (function() {
             "use strict";
 
-            // ----- МУЗЫКА -----
             const audio = document.getElementById('bgMusic');
             const volumeSlider = document.getElementById('volumeSlider');
             const soundIcon = document.getElementById('soundIcon');
             const volumeBtn = document.getElementById('volumeBtn');
+            const overlay = document.getElementById('musicOverlay');
+            const playBtn = document.getElementById('playBtn');
 
             audio.volume = 0.5;
             volumeSlider.value = 0.5;
 
             let musicStarted = false;
 
-            function forcePlayAudio() {
+            // ----- ФУНКЦИЯ ЗАПУСКА МУЗЫКИ -----
+            function startMusic() {
                 if (musicStarted) return;
-                const promise = audio.play();
-                if (promise !== undefined) {
-                    promise.then(() => { musicStarted = true; console.log('🎵 Music started'); })
-                           .catch(() => { setTimeout(() => audio.play().catch(() => {}), 200); });
-                }
+                audio.play()
+                    .then(() => {
+                        musicStarted = true;
+                        overlay.classList.add('hidden'); // Скрываем оверлей
+                        console.log('🎵 Музыка запущена!');
+                    })
+                    .catch((err) => {
+                        console.log('Ошибка запуска:', err);
+                    });
             }
 
-            forcePlayAudio();
-            setTimeout(forcePlayAudio, 300);
-            setTimeout(forcePlayAudio, 700);
+            // ----- ЗАПУСК ПО КЛИКУ НА ОВЕРЛЕЙ ИЛИ КНОПКУ -----
+            overlay.addEventListener('click', startMusic);
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                startMusic();
+            });
 
-            const startOnInteraction = function() {
-                if (!musicStarted) {
-                    audio.play().then(() => { musicStarted = true; }).catch(() => {});
-                }
-                document.removeEventListener('click', startOnInteraction);
-                document.removeEventListener('touchstart', startOnInteraction);
-                document.removeEventListener('keydown', startOnInteraction);
-            };
-            document.addEventListener('click', startOnInteraction);
-            document.addEventListener('touchstart', startOnInteraction);
-            document.addEventListener('keydown', startOnInteraction);
-
+            // ----- ПЕРЕЗАПУСК ПРИ ОКОНЧАНИИ -----
             audio.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play().catch(() => {});
             });
 
+            // ----- ГРОМКОСТЬ -----
             volumeSlider.addEventListener('input', function() {
                 audio.volume = this.value;
                 soundIcon.src = (this.value == 0) ? 'icons/mute.png' : 'icons/sound.png';
@@ -682,7 +743,10 @@
 
             volumeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (!musicStarted) { audio.play().catch(() => {}); musicStarted = true; }
+                if (!musicStarted) {
+                    startMusic();
+                    return;
+                }
                 audio.muted = !audio.muted;
                 soundIcon.src = audio.muted ? 'icons/mute.png' : 'icons/sound.png';
             });
@@ -702,114 +766,4 @@
                 if (isTouching) return;
                 this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
             });
-            mainWindow.addEventListener('touchstart', function() {
-                isTouching = true;
-            });
-            mainWindow.addEventListener('touchend', function() {
-                isTouching = false;
-                this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
-            });
-
-            // ----- КУРСОР -----
-            const cursor = document.getElementById('customCursor');
-            let cursorActive = false;
-            mainWindow.addEventListener('mouseenter', () => { cursor.classList.add('active'); cursorActive = true; });
-            mainWindow.addEventListener('mouseleave', () => { cursor.classList.remove('active'); cursorActive = false; });
-            document.addEventListener('mousemove', function(e) {
-                if (cursorActive) {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                }
-            });
-
-            // ----- DISCORD -----
-            const discordBtn = document.getElementById('discordBtn');
-            const toast = document.getElementById('toast');
-            let toastTimeout;
-            discordBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (!musicStarted) { audio.play().catch(() => {}); musicStarted = true; }
-                navigator.clipboard.writeText('fuckuourself').then(() => {
-                    toast.classList.add('show');
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
-                }).catch(() => alert('Не удалось скопировать'));
-            });
-
-            // ----- СНЕЖИНКИ (улучшены) -----
-            const canvas = document.getElementById('snowCanvas');
-            const ctx = canvas.getContext('2d');
-            let w, h;
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
-
-            const particles = [];
-            const COUNT = 180;
-            for (let i = 0; i < COUNT; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    r: Math.random() * 2.5 + 1.2,
-                    speed: Math.random() * 0.6 + 0.2,
-                    opacity: Math.random() * 0.5 + 0.15,
-                    drift: (Math.random() - 0.5) * 0.3
-                });
-            }
-
-            function drawSnow() {
-                ctx.clearRect(0, 0, w, h);
-                for (let p of particles) {
-                    p.y += p.speed;
-                    p.x += p.drift + Math.sin(p.y * 0.003) * 0.2;
-                    if (p.y > h) { p.y = -5; p.x = Math.random() * w; }
-                    if (p.x > w) p.x = 0;
-                    if (p.x < 0) p.x = w;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-                    grad.addColorStop(0, `rgba(200, 160, 255, ${p.opacity * 0.8})`);
-                    grad.addColorStop(0.6, `rgba(150, 100, 220, ${p.opacity * 0.5})`);
-                    grad.addColorStop(1, `rgba(100, 50, 180, 0)`);
-                    ctx.fillStyle = grad;
-                    ctx.shadowColor = 'rgba(155, 77, 255, 0.15)';
-                    ctx.shadowBlur = 10;
-                    ctx.fill();
-                }
-                requestAnimationFrame(drawSnow);
-            }
-            drawSnow();
-
-            // ----- ЗАГЛУШКИ -----
-            document.getElementById('avatarImg').onerror = function() {
-                this.alt = 'AVATAR';
-                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
-                this.style.display = 'flex';
-                this.style.alignItems = 'center';
-                this.style.justifyContent = 'center';
-                this.style.color = 'rgba(255,255,255,0.3)';
-                this.style.fontFamily = 'Inter';
-                this.style.fontSize = '0.8rem';
-                this.src = '';
-            };
-            document.getElementById('bannerImg').onerror = function() {
-                this.alt = 'BANNER';
-                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
-                this.style.display = 'flex';
-                this.style.alignItems = 'center';
-                this.style.justifyContent = 'center';
-                this.style.color = 'rgba(255,255,255,0.15)';
-                this.style.fontFamily = 'Inter';
-                this.style.fontSize = '1rem';
-                this.src = '';
-            };
-
-            console.log('✨ Liquid Glass дизайн активирован!');
-        })();
-    </script>
-</body>
-</html>	
+            mainWindow.addEventListener('touch
