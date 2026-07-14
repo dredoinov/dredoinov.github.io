@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bio dredoinov</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 20% 50%, #1a0a2e 0%, #0a0412 60%, #05020a 100%);
+            position: relative;
+        }
+
+        /* ---------- ЖИДКИЙ ФОН (Liquid Background) ---------- */
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .liquid-bg .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: liquidFloat 20s ease-in-out infinite alternate;
+        }
+        .liquid-bg .orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #7b2fbe, #4a00e0);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        .liquid-bg .orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #da70d6, #6a0dad);
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -7s;
+        }
+        .liquid-bg .orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #9b4dff, #3a1a6a);
+            top: 40%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+        @keyframes liquidFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(120px, -80px) scale(1.1); }
+            66% { transform: translate(-60px, 100px) scale(0.9); }
+            100% { transform: translate(80px, -40px) scale(1.05); }
+        }
+
+        /* ---------- GLASS-ЭФФЕКТ (основной контейнер) ---------- */
+        .glass-container {
+            position: relative;
+            z-index: 2;
+            width: 82%;
+            max-width: 1020px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border-radius: 60px;
+            padding: 32px 44px 48px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .glass-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 60px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 40%, transparent 60%, rgba(255,255,255,0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* ---------- TOP BAR ---------- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding: 0 4px;
+        }
+
+        /* ---------- ГРОМКОСТЬ (Liquid Glass) ---------- */
+        .volume-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 52px;
+        }
+        .volume-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 6px;
+        }
+        .volume-btn img {
+            width: 22px;
+            height: 22px;
+            filter: drop-shadow(0 0 12px rgba(155, 77, 255, 0.3));
+            transition: 0.3s;
+        }
+        .volume-btn:hover {
+            background: rgba(155, 77, 255, 0.15);
+            border-color: rgba(155, 77, 255, 0.3);
+            transform: scale(1.04);
+            box-shadow: 0 0 40px rgba(155, 77, 255, 0.15), inset 0 0 40px rgba(155, 77, 255, 0.05);
+        }
+
+        .volume-slider {
+            width: 6px;
+            height: 0;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+            opacity: 0;
+            box-shadow: inset 0 0 20px rgba(155, 77, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .volume-wrap:hover .volume-slider,
+        .volume-slider:hover {
+            height: 140px;
+            opacity: 1;
+        }
+        .volume-slider input[type="range"] {
+            writing-mode: bt-lr;
+            -webkit-appearance: slider-vertical;
+            appearance: slider-vertical;
+            width: 6px;
+            height: 100%;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+        .volume-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(155, 77, 255, 0.5), 0 0 80px rgba(155, 77, 255, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .volume-slider input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 60px rgba(155, 77, 255, 0.7), 0 0 120px rgba(155, 77, 255, 0.3);
+        }
+        .volume-slider input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #7b2fbe);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(155, 77, 255, 0.5);
+            cursor: pointer;
+        }
+
+        /* ---------- БОССБАР (Liquid Glass) ---------- */
+        .boss-bar {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 32px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            flex-grow: 1;
+            margin: 0 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .boss-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #7b2fbe, #da70d6, #c084fc, #7b2fbe, transparent);
+            background-size: 300% 100%;
+            animation: bossGlow 4s linear infinite;
+            filter: blur(2px);
+            opacity: 0.6;
+        }
+        @keyframes bossGlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .boss-bar h1 {
+            font-family: 'Russo One', sans-serif;
+            font-weight: 400;
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #b8a0d4, #8a6fc4, #6a4fa4, #5a3f94);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 30px rgba(100, 60, 180, 0.15));
+            animation: textGlow 4s ease-in-out infinite;
+        }
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(100, 60, 180, 0.1)); }
+            50% { filter: drop-shadow(0 0 40px rgba(150, 80, 220, 0.25)) drop-shadow(0 0 80px rgba(100, 60, 180, 0.1)); }
+        }
+
+        /* ---------- ГЛАВНОЕ ОКНО (Liquid Glass) ---------- */
+        .main-window {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 2 / 5;
+            max-height: 62vh;
+            margin: 12px auto 28px;
+            border-radius: 40px;
+            background: radial-gradient(ellipse at 30% 30%, rgba(30, 10, 50, 0.7), rgba(10, 3, 18, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            perspective: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            will-change: transform;
+            backdrop-filter: blur(10px);
+        }
+        .main-window::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 40px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%, transparent 60%, rgba(255,255,255,0.02));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* ---------- БАННЕР ---------- */
+        .banner-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44%;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 40px 40px 0 0;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.6s ease;
+        }
+        .banner-container:hover { opacity: 0.9; }
+        .banner-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.8) saturate(1.1);
+        }
+
+        /* ---------- АВАТАРКА (Glass) ---------- */
+        .avatar-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 28px;
+            z-index: 5;
+        }
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: block;
+            position: relative;
+            z-index: 2;
+            filter: none;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .avatar-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        .avatar-ring {
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, 
+                rgba(123, 47, 190, 0.6), rgba(218, 112, 214, 0.6), rgba(192, 132, 252, 0.6), 
+                rgba(123, 47, 190, 0.6), rgba(74, 0, 224, 0.6), rgba(218, 112, 214, 0.6));
+            background-size: 200% 200%;
+            animation: spinRing 3s linear infinite, pulseRing 2s ease-in-out infinite alternate;
+            z-index: 1;
+            filter: blur(8px) brightness(1.2);
+            opacity: 0.7;
+        }
+        @keyframes spinRing {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        @keyframes pulseRing {
+            0% { opacity: 0.4; filter: blur(6px) brightness(1); }
+            100% { opacity: 0.8; filter: blur(12px) brightness(1.6); }
+        }
+
+        /* ---------- КНОПКИ (Glass) ---------- */
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 78%;
+            max-width: 280px;
+            margin-top: 6px;
+            z-index: 5;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 60px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        .social-btn img {
+            width: 26px;
+            height: 26px;
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            z-index: 1;
+            transition: 0.4s;
+        }
+        .social-btn span {
+            z-index: 1;
+            flex: 1;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 60px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 40%, transparent 60%, rgba(255,255,255,0.03));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .social-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(155, 77, 255, 0.08), transparent);
+            transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 0;
+        }
+        .social-btn:hover::after {
+            left: 100%;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            border-color: rgba(155, 77, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 40px rgba(155, 77, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .social-btn:hover img {
+            filter: grayscale(100%) contrast(1.2) brightness(1.1);
+            transform: scale(1.04);
+        }
+
+        /* ---------- СНЕЖИНКИ ---------- */
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(20, 10, 35, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 14px 32px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 9999;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---------- КУРСОР (ореол) ---------- */
+        .custom-cursor {
+            position: fixed;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(155, 77, 255, 0.08) 0%, rgba(75, 0, 130, 0.04) 50%, transparent 80%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            filter: blur(30px);
+            mix-blend-mode: screen;
+        }
+        .custom-cursor.active {
+            opacity: 1;
+        }
+
+        /* ---------- КОПИРАЙТ ---------- */
+        .footer-copyright {
+            position: fixed;
+            bottom: 22px;
+            right: 32px;
+            color: rgba(255, 255, 255, 0.15);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            z-index: 999;
+            text-align: right;
+            line-height: 1.5;
+            pointer-events: none;
+            user-select: none;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .footer-copyright span {
+            opacity: 0.5;
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 768px) {
+            .glass-container { width: 94%; padding: 20px 18px 32px; border-radius: 40px; }
+            .boss-bar h1 { font-size: 1.4rem; letter-spacing: 2px; }
+            .top-bar { flex-wrap: wrap; gap: 12px; }
+            .volume-wrap { order: 1; }
+            .boss-bar { order: 2; margin: 0; flex: 1 1 100%; }
+            .main-window { aspect-ratio: 2 / 3; border-radius: 28px; }
+            .main-window::before { border-radius: 28px; }
+            .avatar-wrapper { width: 110px; height: 110px; }
+            .social-btn { font-size: 0.8rem; padding: 12px 16px; }
+            .social-btn img { width: 22px; height: 22px; }
+            .footer-copyright { font-size: 0.5rem; bottom: 12px; right: 14px; padding: 4px 12px; }
+            .liquid-bg .orb { filter: blur(50px); }
+            .liquid-bg .orb:nth-child(1) { width: 300px; height: 300px; }
+            .liquid-bg .orb:nth-child(2) { width: 250px; height: 250px; }
+            .liquid-bg .orb:nth-child(3) { width: 200px; height: 200px; }
+            .glass-container::before { border-radius: 40px; }
+        }
+        @media (max-width: 480px) {
+            .glass-container { padding: 16px 12px 24px; border-radius: 30px; }
+            .boss-bar h1 { font-size: 1.1rem; letter-spacing: 1px; }
+            .boss-bar { padding: 10px 16px; }
+            .social-btn { font-size: 0.7rem; padding: 10px 14px; gap: 10px; }
+            .social-btn img { width: 20px; height: 20px; }
+            .avatar-wrapper { width: 90px; height: 90px; }
+            .main-window { border-radius: 20px; }
+            .main-window::before { border-radius: 20px; }
+            .banner-container { border-radius: 20px 20px 0 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ЖИДКИЙ ФОН -->
+    <div class="liquid-bg">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <canvas id="snowCanvas"></canvas>
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="toast" id="toast">Discord скопирован в буфер обмена</div>
+
+    <div class="footer-copyright">
+        © 2026 bio dredoinov<br>
+        <span>Никакие права не защищены!</span>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР GLASS -->
+    <div class="glass-container" id="container">
+
+        <div class="top-bar">
+            <div class="volume-wrap">
+                <div class="volume-btn" id="volumeBtn">
+                    <img src="icons/sound.png" alt="sound" id="soundIcon">
+                </div>
+                <div class="volume-slider">
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+                </div>
+            </div>
+
+            <div class="boss-bar">
+                <h1>BIO DREDOINOV</h1>
+            </div>
+            <div style="width:52px;"></div>
+        </div>
+
+        <div class="main-window" id="mainWindow">
+            <div class="banner-container">
+                <img src="img/banner.png" alt="banner" id="bannerImg">
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img src="img/images.png" alt="avatar" id="avatarImg">
+            </div>
+            <div class="social-buttons">
+                <a href="https://www.youtube.com/@nastyk1d" target="_blank" class="social-btn">
+                    <img src="icons/youtube.png" alt="YouTube">
+                    <span>YouTube</span>
+                </a>
+                <button class="social-btn" id="discordBtn">
+                    <img src="icons/discord.png" alt="Discord">
+                    <span>Discord</span>
+                </button>
+                <a href="https://funpay.com/users/6491336/" target="_blank" class="social-btn">
+                    <img src="icons/funpay.png" alt="FunPay">
+                    <span>FunPay</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- АУДИО -->
+    <audio id="bgMusic" loop>
+        <source src="audio/Face_feat._xxxtentacion_-_Forever_Young_(SkySound.cc).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ----- МУЗЫКА -----
+            const audio = document.getElementById('bgMusic');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const soundIcon = document.getElementById('soundIcon');
+            const volumeBtn = document.getElementById('volumeBtn');
+
+            audio.volume = 0.5;
+            volumeSlider.value = 0.5;
+
+            let musicStarted = false;
+
+            function forcePlayAudio() {
+                if (musicStarted) return;
+                const promise = audio.play();
+                if (promise !== undefined) {
+                    promise.then(() => { musicStarted = true; console.log('🎵 Music started'); })
+                           .catch(() => { setTimeout(() => audio.play().catch(() => {}), 200); });
+                }
+            }
+
+            forcePlayAudio();
+            setTimeout(forcePlayAudio, 300);
+            setTimeout(forcePlayAudio, 700);
+
+            const startOnInteraction = function() {
+                if (!musicStarted) {
+                    audio.play().then(() => { musicStarted = true; }).catch(() => {});
+                }
+                document.removeEventListener('click', startOnInteraction);
+                document.removeEventListener('touchstart', startOnInteraction);
+                document.removeEventListener('keydown', startOnInteraction);
+            };
+            document.addEventListener('click', startOnInteraction);
+            document.addEventListener('touchstart', startOnInteraction);
+            document.addEventListener('keydown', startOnInteraction);
+
+            audio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play().catch(() => {});
+            });
+
+            volumeSlider.addEventListener('input', function() {
+                audio.volume = this.value;
+                soundIcon.src = (this.value == 0) ? 'icons/mute.png' : 'icons/sound.png';
+            });
+
+            volumeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!musicStarted) { audio.play().catch(() => {}); musicStarted = true; }
+                audio.muted = !audio.muted;
+                soundIcon.src = audio.muted ? 'icons/mute.png' : 'icons/sound.png';
+            });
+
+            // ----- 3D ЭФФЕКТ -----
+            const mainWindow = document.getElementById('mainWindow');
+            let isTouching = false;
+
+            mainWindow.addEventListener('mousemove', function(e) {
+                if (isTouching) return;
+                const rect = this.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                this.style.transform = `perspective(900px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg) scale(1.01)`;
+            });
+            mainWindow.addEventListener('mouseleave', function() {
+                if (isTouching) return;
+                this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+            mainWindow.addEventListener('touchstart', function() {
+                isTouching = true;
+            });
+            mainWindow.addEventListener('touchend', function() {
+                isTouching = false;
+                this.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+
+            // ----- КУРСОР -----
+            const cursor = document.getElementById('customCursor');
+            let cursorActive = false;
+            mainWindow.addEventListener('mouseenter', () => { cursor.classList.add('active'); cursorActive = true; });
+            mainWindow.addEventListener('mouseleave', () => { cursor.classList.remove('active'); cursorActive = false; });
+            document.addEventListener('mousemove', function(e) {
+                if (cursorActive) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }
+            });
+
+            // ----- DISCORD -----
+            const discordBtn = document.getElementById('discordBtn');
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+            discordBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!musicStarted) { audio.play().catch(() => {}); musicStarted = true; }
+                navigator.clipboard.writeText('fuckuourself').then(() => {
+                    toast.classList.add('show');
+                    clearTimeout(toastTimeout);
+                    toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+                }).catch(() => alert('Не удалось скопировать'));
+            });
+
+            // ----- СНЕЖИНКИ (улучшены) -----
+            const canvas = document.getElementById('snowCanvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const particles = [];
+            const COUNT = 180;
+            for (let i = 0; i < COUNT; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 2.5 + 1.2,
+                    speed: Math.random() * 0.6 + 0.2,
+                    opacity: Math.random() * 0.5 + 0.15,
+                    drift: (Math.random() - 0.5) * 0.3
+                });
+            }
+
+            function drawSnow() {
+                ctx.clearRect(0, 0, w, h);
+                for (let p of particles) {
+                    p.y += p.speed;
+                    p.x += p.drift + Math.sin(p.y * 0.003) * 0.2;
+                    if (p.y > h) { p.y = -5; p.x = Math.random() * w; }
+                    if (p.x > w) p.x = 0;
+                    if (p.x < 0) p.x = w;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+                    grad.addColorStop(0, `rgba(200, 160, 255, ${p.opacity * 0.8})`);
+                    grad.addColorStop(0.6, `rgba(150, 100, 220, ${p.opacity * 0.5})`);
+                    grad.addColorStop(1, `rgba(100, 50, 180, 0)`);
+                    ctx.fillStyle = grad;
+                    ctx.shadowColor = 'rgba(155, 77, 255, 0.15)';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                }
+                requestAnimationFrame(drawSnow);
+            }
+            drawSnow();
+
+            // ----- ЗАГЛУШКИ -----
+            document.getElementById('avatarImg').onerror = function() {
+                this.alt = 'AVATAR';
+                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.color = 'rgba(255,255,255,0.3)';
+                this.style.fontFamily = 'Inter';
+                this.style.fontSize = '0.8rem';
+                this.src = '';
+            };
+            document.getElementById('bannerImg').onerror = function() {
+                this.alt = 'BANNER';
+                this.style.background = 'linear-gradient(135deg, #2a0a4a, #1a0b2e)';
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.color = 'rgba(255,255,255,0.15)';
+                this.style.fontFamily = 'Inter';
+                this.style.fontSize = '1rem';
+                this.src = '';
+            };
+
+            console.log('✨ Liquid Glass дизайн активирован!');
+        })();
+    </script>
+</body>
+</html>
